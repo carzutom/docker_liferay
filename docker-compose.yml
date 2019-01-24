@@ -1,0 +1,25 @@
+version: '2'
+services:
+  portal:
+    container_name: liferay_portal_ce
+    build: .
+    image: server_liferay
+    restart: always
+    environment:
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD=cArzu123
+    ports:
+     - "8080:8080"
+     - "22228:22"
+    depends_on:
+     - mysql
+  mysql:
+    container_name: liferay_db
+    image: mdelapenya/mysql-utf8
+    restart: always
+    ports:
+     - "3506:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=cArzu123
+      - MYSQL_DATABASE=lportal
+      - character-set-server=utf8mb4
+      - collation-server=utf8mb4_unicode_ci
